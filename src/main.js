@@ -1,9 +1,10 @@
 import { createApp } from 'vue'
+import {createHead} from '@vueuse/head'
 import App from './App.vue'
 import routes from './routes'
-import BootstrapVue from "bootstrap-vue"
-import "bootstrap/dist/css/bootstrap.min.css"
-import "bootstrap-vue/dist/bootstrap-vue.css"
+// import BootstrapVue from "bootstrap-vue"
+// import "bootstrap/dist/css/bootstrap.min.css"
+// import "bootstrap-vue/dist/bootstrap-vue.css"
 import store from './store';
 import axios from "axios";
 
@@ -35,8 +36,9 @@ axios.interceptors.response.use(
   });
 
 
-
-const app=createApp(App);
+  const head = createHead()
+  const app=createApp(App);
+  app.use(head);
 app.use(routes);
 app.use(store);
 app.mount('#app');

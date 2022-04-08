@@ -51,7 +51,7 @@ export default {
           localStorage.setItem("authToken", response.data.token);
         });
     },
-    sendLogoutRequest({ commit }) {
+    sendLogoutRequest({ state,commit }) {
       axios.post(import.meta.env.VITE_VUE_APP_API_URL + "logout").then(() => {
         commit("setUserData", null);
         state.authToken=null;

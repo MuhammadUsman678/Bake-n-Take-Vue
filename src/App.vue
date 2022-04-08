@@ -1,12 +1,16 @@
 <script setup>
-
+ import { Head } from '@vueuse/head'
 </script>
 
 <template>
-   <router-view></router-view>
+<div>
+    <!-- <teleport to='#bpopup'>
+        <BPopup />
+    </teleport> -->
+    <router-view></router-view>
+</div>
 </template>
 
 <style>
-@import './assets/base.css';
-
+/* @import './assets/base.css'; */
 </style>

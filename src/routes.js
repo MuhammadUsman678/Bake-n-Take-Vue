@@ -4,7 +4,7 @@ import Page404NotFound from './components/Page404NotFound.vue';
 import Login from './components/Authentication/Login.vue';
 import Register from './components/Authentication/Register.vue';
 import Verify from './components/Authentication/Verify.vue';
-import AuthHome from './components/Authentication/Home.vue';
+import Home from './components/Home.vue';
 import store from '@/store/';
 import * as NProgress from 'nprogress'
 
@@ -12,7 +12,7 @@ const guest = (to, from, next) => {
    if (!localStorage.getItem("authToken")) {
     return next();
   } else {
-    return next("/auth/home");
+    return next("/");
   }
 };
 const auth = (to, from, next) => {
@@ -28,8 +28,8 @@ const auth = (to, from, next) => {
 const routes = [
   {
     path: "/",
-    name: "AuthHome",
-    component:AuthHome,
+    name: "Home",
+    component:Home,
   },
   {
     path: "/auth/login",
