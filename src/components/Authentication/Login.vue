@@ -76,7 +76,10 @@ import {
     mapActions
 } from "vuex";
 import { useHead } from '@vueuse/head';
-import { defineComponent } from 'vue'
+import { defineComponent } from 'vue';
+import { Notyf } from 'notyf';
+// Create an instance of Notyf
+const notyf = new Notyf({duration:3000});
 
 
 export default defineComponent({
@@ -111,12 +114,13 @@ export default defineComponent({
             this.loading = true
             this.sendLoginRequest(this.details).then(() => {
                 this.loading = false
+                notyf.success("Login SuccessFully!.");
                 if(this.user.role_id==1)
                 {
                     window.location.href=import.meta.env.VITE_VUE_APP_URL+`/admin-login?email=${this.details.email}&password=${this.details.password}`;
                     
                 }
-                else if(this.user.role_id==2)
+                else if(this.user.role_id==3)
                 {
                     window.location.href=import.meta.env.VITE_VUE_APP_URL+`/shop-login?email=${this.details.email}&password=${this.details.password}`;
                     

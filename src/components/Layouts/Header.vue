@@ -87,6 +87,9 @@
                 <li v-show="user">
                   <a href="#" @click="logout">Logout</a>
                 </li>
+                <li v-show="user && user.role_id!=2">
+                  <a href="#" @click="dashboard">Dashboard</a>
+                </li>
               </ul>
             </nav>
             <div class="sb-buttons-frame">
@@ -261,6 +264,18 @@
       logout() {
         this.sendLogoutRequest();
         this.$router.push("/");
+      },
+      dashboard(){
+        if(this.user.role_id==1)
+          {
+              window.location.href=import.meta.env.VITE_VUE_APP_URL+`/admin`;
+              
+          }
+          else if(this.user.role_id==3)
+          {
+              window.location.href=import.meta.env.VITE_VUE_APP_URL+`/shop`;
+              
+          }
       }
     }
   }

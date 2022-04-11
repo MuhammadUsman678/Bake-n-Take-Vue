@@ -16,6 +16,9 @@
                                 <!-- main title -->
                                 <div class="sb-main-title-frame">
                                     <div class="sb-main-title">
+                                        <div class="alert alert-danger mt-5" v-if="user && !user.email_verified_at">
+                                            Email Verification is Pending Please Verify Your Email. If You have't receive any email click <a href="#" class="text-warning" @click="verifyResend">here</a> to send another email.
+                                        </div>
                                         <span v-if="user" class="sb-suptitle sb-mb-30">Hi, {{user.name}}!</span>
                                         <h1 class="sb-mb-30">We do not <span>cook</span>, <br>we <span>create</span> your <br>emotions!</h1>
                                         <p class="sb-text sb-text-lg sb-mb-30">Consectetur numquam poro nemo veniam<br>eligendi rem adipisci quo modi.</p>
@@ -485,6 +488,9 @@ import Master from './Layouts/Master.vue';
 import {mapGetters,mapActions} from "vuex";
 import { defineComponent } from 'vue'
 import { useHead } from '@vueuse/head';
+import { Notyf } from 'notyf';
+// Create an instance of Notyf
+const notyf = new Notyf({duration:3000});
 
 
 
@@ -495,6 +501,25 @@ export default defineComponent({
     },
      computed: {
         ...mapGetters("auth", ["user"])
+    },
+    mounted() {
+        if (localStorage.getItem("authToken")) {
+            this.getUserData();
+        }
+    },
+    methods: {
+        ...mapActions("auth", ["sendVerifyResendRequest", "getUserData"]),
+        verifyResend() {
+            notyf.success("Please Wait we are Prcossing this request.");
+            this.sendVerifyResendRequest()
+                .then(() => {
+                    notyf.success("A fresh verification link has been sent to your email address.");
+                })
+                .catch(error => {
+                    notyf.error("Error sending verification link.");
+                    // console.log(error.response);
+                });
+        }
     },
     setup() {
     useHead({

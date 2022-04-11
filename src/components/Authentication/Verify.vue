@@ -42,6 +42,9 @@ import {
     mapGetters,
     mapActions
 } from "vuex";
+import { Notyf } from 'notyf';
+// Create an instance of Notyf
+const notyf = new Notyf({duration:3000});
 import Master from '../Layouts/Master.vue';
 export default {
     props: ["hash"],
@@ -56,11 +59,11 @@ export default {
     mounted() {
         this.sendVerifyRequest(this.hash)
             .then(() => {
-                this.$router.push("/auth/home");
+                this.$router.push("/");
             })
             .catch(error => {
                 console.log(error.response);
-                this.error = "Error verifying email";
+                notyf.error("Error verifying email");
             });
     },
     computed: {

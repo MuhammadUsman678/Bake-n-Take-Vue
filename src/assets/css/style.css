@@ -97,6 +97,19 @@ font
 preloader
 
 ***************************/
+
+#nprogress .bar {
+  background: #f5c332;
+  z-index: 10000;
+}
+#nprogress .spinner-icon {
+  border-top-color: #f5c332;
+  border-left-color: #f5c332;
+}
+/* Fancy blur effect */
+#nprogress .peg {
+  box-shadow: 0 0 10px #f5c332, 0 0 5px #f5c332;
+}
 .sb-preloader {
   width: 100%;
   height: 100vh;

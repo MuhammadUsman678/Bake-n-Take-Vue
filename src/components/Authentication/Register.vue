@@ -98,6 +98,9 @@ import {
 } from "vuex";
 import { defineComponent } from 'vue'
 import { useHead } from '@vueuse/head';
+import { Notyf } from 'notyf';
+// Create an instance of Notyf
+const notyf = new Notyf({duration:3000});
 
 export default defineComponent({
     name: "Register",
@@ -130,9 +133,10 @@ export default defineComponent({
         ...mapActions("auth", ["sendRegisterRequest"]),
         register: function () {
             this.loading = true
-            
               const response = this.sendRegisterRequest(this.details).then(() => {
                     this.loading = false
+                    notyf.success("Register SuccessFully!.");
+                    notyf.success('We have sent you a email please verify your email');
                     this.$router.push({
                         name: "Home"
                     });
